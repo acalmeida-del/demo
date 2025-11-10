@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.dto.HrResponse;
 import com.example.demo.dto.ImporterData;
+import com.example.demo.dto.ImporterDetailsResponse;
 import com.example.demo.service.NebrasService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class NebrasController {
     }
 
     @GetMapping("/getImporterDetails")
-    public ResponseEntity<ImporterData> getImporterDetails()
+    public ResponseEntity<ImporterDetailsResponse> getImporterDetails()
     {
         return nebrasService.getImporterDetails();
     }

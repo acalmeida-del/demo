@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.HrResponse;
 import com.example.demo.dto.ImporterData;
+import com.example.demo.dto.ImporterDetailsResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -41,7 +42,7 @@ public class NebrasServiceImp implements NebrasService{
     }
 
     @Override
-    public ResponseEntity<ImporterData> getImporterDetails() {
+    public ResponseEntity<ImporterDetailsResponse> getImporterDetails() {
         String url = "https://test-internal-api.zatca.gov.sa/test/internal/v1/importer/details?importerIdentityType=ImporterNumber&identityNumber=23&countryCode=100&routePortCode=99";
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-ZATCA-Client-Id", "cda747fe5c68e72608fa60ba6c6f56c6");
@@ -51,12 +52,12 @@ public class NebrasServiceImp implements NebrasService{
 
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<ImporterData> response =
+        ResponseEntity<ImporterDetailsResponse> response =
                 restTemplate.exchange(
                         url,
                         HttpMethod.GET,
                         entity,
-                        new ParameterizedTypeReference<ImporterData>() {}
+                        new ParameterizedTypeReference<ImporterDetailsResponse>() {}
                 );
 
         return ResponseEntity.ok(response.getBody());
