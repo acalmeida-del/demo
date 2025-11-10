@@ -16,7 +16,7 @@ public class ProductService {
     private final RestTemplate restTemplate;
 
     public ResponseEntity<Product> getProductByHscode(String hscode) {
-        String url = "https://localhost:8080/products/" + hscode;
+        String url = "http://localhost:8081/products/" + hscode;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.APPLICATION_JSON, MediaType.ALL));
