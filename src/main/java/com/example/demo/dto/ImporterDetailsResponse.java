@@ -13,5 +13,5 @@ public class ImporterDetailsResponse {
     private Header header;
 
     @JsonProperty("data")
-    private ImporterData data;
+    private ImporterDetail importerDetail;
 }
