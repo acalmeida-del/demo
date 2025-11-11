@@ -33,4 +33,9 @@ public class ProductService {
 
         return ResponseEntity.ok(response.getBody());
     }
+
+    public ResponseEntity<Product> createProduct(Product product) {
+        String url = "http://172.19.130.11:8080/products";
+        return restTemplate.postForEntity(url, product, Product.class);
+    }
 }
