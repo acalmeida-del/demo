@@ -38,4 +38,47 @@ public class ProductService {
         String url = "http://172.19.130.11:8080/products";
         return restTemplate.postForEntity(url, product, Product.class);
     }
+
+    public ResponseEntity<String> helloGuest() {
+        String url = "https://dev-api-bzms.zatca.gov.sa/hello";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON, MediaType.ALL));
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> response =
+                restTemplate.exchange(
+                        url,
+                        HttpMethod.GET,
+                        entity,
+                        new ParameterizedTypeReference<String>() {}
+                );
+
+        return ResponseEntity.ok(response.getBody());
+    }
+
+    public ResponseEntity<Product> getProductByHscodeThroughApigee(String hscode) {
+        String url = "https://dev-api-bzms.zatca.gov.sa/products/" + hscode;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON, MediaType.ALL));
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<Product> response =
+                restTemplate.exchange(
+                        url,
+                        HttpMethod.GET,
+                        entity,
+                        new ParameterizedTypeReference<Product>() {}
+                );
+
+        return ResponseEntity.ok(response.getBody());
+    }
+
+    public ResponseEntity<Product> createProductThroughApigee(Product product) {
+        String url = "https://dev-api-bzms.zatca.gov.sa/createProductDomainService";
+        return restTemplate.postForEntity(url, product, Product.class);
+    }
 }

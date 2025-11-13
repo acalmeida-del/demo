@@ -24,4 +24,19 @@ public class ProductController {
     public ResponseEntity<Product> createProduct(@RequestBody Product request) {
         return productService.createProduct(request);
     }
+
+    @GetMapping("/helloGuest")
+    public ResponseEntity<String> helloGuest() {
+        return productService.helloGuest();
+    }
+
+    @PostMapping("/adapter-create-product")
+    public ResponseEntity<Product> createProductThroughApigee(@RequestBody Product request) {
+        return productService.createProductThroughApigee(request);
+    }
+
+    @GetMapping("/adapterGetProductsByHsCode/{hscode}")
+    public ResponseEntity<Product> getProductThroughApigee(@PathVariable String hscode) {
+        return productService.getProductByHscodeThroughApigee(hscode);
+    }
 }
