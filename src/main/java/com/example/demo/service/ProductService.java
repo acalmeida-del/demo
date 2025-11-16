@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.Product;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ProductService {
 
     private final RestTemplate restTemplate;
@@ -79,6 +81,9 @@ public class ProductService {
 
     public ResponseEntity<Product> createProductThroughApigee(Product product) {
         String url = "https://dev-api-bzms.zatca.gov.sa/createProductDomainService";
-        return restTemplate.postForEntity(url, product, Product.class);
+        log.info("Sending POST request to URL: {} with product: {}", url, product);
+        ResponseEntity<Product> response = restTemplate.postForEntity(url, product, Product.class);
+        log.info("Received response: Status Code = {}, Body = {}", response.getStatusCode(), response.getBody());
+        return response;
     }
 }
